@@ -12,10 +12,8 @@ const AppState = {
   currentModalDay: null
 };
 
-// Web Audio API para efectos de sonido y música de fondo sin dependencias
+// Web Audio API para efectos de sonido (chimes y besos)
 let audioCtx = null;
-let musicInterval = null;
-let isPlayingMusic = false;
 
 function initAudio() {
   if (!audioCtx) {
@@ -73,70 +71,6 @@ function playKissSound() {
     osc.start();
     osc.stop(audioCtx.currentTime + 0.2);
   } catch (e) {}
-}
-
-// Melodía tipo cajita musical navideña (Noche de Paz en bucle suave)
-const NOCHE_DE_PAZ_MELODIA = [
-  { f: 392.00, d: 0.6 }, // G4
-  { f: 440.00, d: 0.3 }, // A4
-  { f: 392.00, d: 0.8 }, // G4
-  { f: 329.63, d: 1.2 }, // E4
-  { f: 392.00, d: 0.6 }, // G4
-  { f: 440.00, d: 0.3 }, // A4
-  { f: 392.00, d: 0.8 }, // G4
-  { f: 329.63, d: 1.2 }, // E4
-  { f: 587.33, d: 0.8 }, // D5
-  { f: 587.33, d: 0.5 }, // D5
-  { f: 493.88, d: 1.2 }, // B4
-  { f: 523.25, d: 0.8 }, // C5
-  { f: 523.25, d: 0.5 }, // C5
-  { f: 392.00, d: 1.2 }, // G4
-];
-
-let currentNoteIndex = 0;
-function toggleBackgroundMusic() {
-  initAudio();
-  const musicBtn = document.getElementById('btn-music');
-  
-  if (isPlayingMusic) {
-    isPlayingMusic = false;
-    clearTimeout(musicInterval);
-    if (musicBtn) {
-      musicBtn.classList.remove('active');
-      musicBtn.innerHTML = '🎵 Música: Off';
-    }
-  } else {
-    isPlayingMusic = true;
-    if (musicBtn) {
-      musicBtn.classList.add('active');
-      musicBtn.innerHTML = '🎶 Música: On';
-    }
-    currentNoteIndex = 0;
-    playNextMusicNote();
-  }
-}
-
-function playNextMusicNote() {
-  if (!isPlayingMusic || !audioCtx) return;
-  const note = NOCHE_DE_PAZ_MELODIA[currentNoteIndex];
-  
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type = 'sine';
-  osc.frequency.setValueAtTime(note.f, audioCtx.currentTime);
-
-  // Timbre de cajita musical
-  gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + note.d);
-
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  osc.start();
-  osc.stop(audioCtx.currentTime + note.d);
-
-  currentNoteIndex = (currentNoteIndex + 1) % NOCHE_DE_PAZ_MELODIA.length;
-  musicInterval = setTimeout(playNextMusicNote, note.d * 900);
 }
 
 // ==========================================
@@ -251,11 +185,6 @@ function updateProgress() {
   // Solo contar días que son válidamente abiertos
   const opened = AppState.openedDays.filter(dia => isDateUnlocked(dia)).length;
   const pct = Math.round((opened / total) * 100);
-
-  const fill = document.getElementById('progress-fill');
-  const text = document.getElementById('progress-text');
-  if (fill) fill.style.width = `${pct}%`;
-  if (text) text.innerText = `${opened} de ${total} sorpresas abiertas (${pct}%)`;
 
   const welcomeFill = document.getElementById('welcome-progress-fill');
   const welcomeText = document.getElementById('welcome-progress-text');
@@ -740,23 +669,10 @@ function canjearCupon(couponId) {
 function togglePreviewMode() {
   AppState.previewMode = !AppState.previewMode;
   localStorage.setItem('adviento_preview_mode', AppState.previewMode);
-  updatePreviewButton();
   renderCalendar();
   setTimeout(() => {
     scrollToCurrentDay(true);
   }, 100);
-}
-
-function updatePreviewButton() {
-  const btn = document.getElementById('btn-preview-mode');
-  if (!btn) return;
-  if (AppState.previewMode) {
-    btn.innerHTML = '🔓 Modo Pruebas: Desbloqueado';
-    btn.classList.add('active');
-  } else {
-    btn.innerHTML = '🔒 Modo Real: Fecha Bloqueada';
-    btn.classList.remove('active');
-  }
 }
 
 // ==========================================
@@ -844,15 +760,6 @@ function initSnow() {
   draw();
 }
 
-function toggleSnow() {
-  AppState.snowEnabled = !AppState.snowEnabled;
-  const btn = document.getElementById('btn-snow');
-  if (btn) {
-    btn.innerHTML = AppState.snowEnabled ? '❄️ Nieve: On' : '❄️ Nieve: Off';
-    btn.classList.toggle('active', AppState.snowEnabled);
-  }
-}
-
 // ==========================================
 // CONFETTI FESTIVO CASERO (Sin dependencias)
 // ==========================================
@@ -913,17 +820,6 @@ function notificarTelegram(mensaje) {
   } catch (e) {
     console.warn("Error en notificarTelegram:", e);
   }
-}
-
-// ==========================================
-// NAVEGACIÓN DE CARRUSEL EN CELULAR
-// ==========================================
-function scrollCalendar(direction) {
-  const grid = document.getElementById('calendar-grid');
-  if (!grid) return;
-  const firstCard = grid.querySelector('.advent-card');
-  const scrollAmount = firstCard ? (firstCard.offsetWidth + 32) : window.innerWidth;
-  grid.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
 // ==========================================
@@ -989,7 +885,6 @@ function scrollToCurrentDay(smooth = true) {
 // INICIALIZACIÓN
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-  updatePreviewButton();
   renderCalendar();
   initSnow();
 
