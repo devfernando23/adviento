@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario de Adviento para Fio</title>
+
+  <!-- Tipografías elegantes y románticas de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:wght@700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
+</head>
+
+<body>
+
+  <!-- Canvas de copos de nieve interactivos -->
+  <canvas id="snow-canvas"></canvas>
+
+  <div class="app-container">
+
+
+    <!-- Grilla / Carrusel de las 24 Puertas de Adviento -->
+    <main class="calendar-grid" id="calendar-grid">
+      <!-- Generado dinámicamente desde data.js y script.js -->
+    </main>
+
+  </div>
+
+  <!-- Botón Flotante: Billetera de Cupones -->
+  <button class="floating-wallet-btn" onclick="openWalletModal()" title="Ver tus cupones de amor acumulados">
+    <span>🎟️ Mis Cupones</span>
+    <span class="wallet-badge" id="wallet-count">0</span>
+  </button>
+
+  <!-- MODAL DE BIENVENIDA (Aparece automáticamente al cargar la página) -->
+  <div class="modal-overlay" id="welcome-modal">
+    <div class="modal-card welcome-modal-card">
+      <button class="modal-close-btn" onclick="closeWelcomeModal()" title="Cerrar">✕</button>
+
+      <div class="welcome-header-badge">Para la persona más especial del mundo ✨</div>
+      <h2 class="welcome-modal-title">24 Días Contigo</h2>
+      <p class="welcome-modal-subtitle">Un regalo cada día hasta Navidad para recordarte lo mucho que te amo ❤️🎄</p>
+
+      <!-- Barra de progreso dentro del modal -->
+      <div class="progress-container welcome-progress-box">
+        <div class="progress-header">
+          <span>Progreso de Diciembre</span>
+          <span id="welcome-progress-text">0 de 24 sorpresas abiertas (0%)</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-fill" id="welcome-progress-fill"></div>
+        </div>
+      </div>
+
+      <p class="welcome-short-note">
+        Cada fecha de diciembre guarda un detalle especial para ti. ¡Desliza las tarjetas para descubrir tu sorpresa de
+        hoy! ✨
+      </p>
+
+      <button class="btn-primary" onclick="closeWelcomeModal()"
+        style="font-size: 1rem; padding: 12px 22px; margin-top: 6px;">
+        🎁 Abrir mi Calendario ❤️
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: Detalle de Sorpresa del Día -->
+  <div class="modal-overlay" id="day-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal()" title="Cerrar ventana">✕</button>
+
+      <div class="modal-ribbon">
+        <span class="modal-day-tag" id="modal-day-tag">Día 1 de Diciembre</span>
+      </div>
+
+      <h2 class="modal-title" id="modal-title">Título de la Sorpresa</h2>
+      <p class="modal-subtitle" id="modal-subtitle">Subtítulo o dedicatoria</p>
+
+      <div class="modal-body" id="modal-dynamic-content">
+        <!-- Contenido dinámico (cupones, raspa y gana, ruleta, frasco de besos, cartas) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Billetera de Cupones -->
+  <div class="modal-overlay" id="wallet-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeWalletModal()" title="Cerrar ventana">✕</button>
+
+      <div class="modal-ribbon">
+        <span class="modal-day-tag">🎟️ Billetera de Cupones</span>
+      </div>
+
+      <h2 class="modal-title">Tus Vales Especiales</h2>
+      <p class="modal-subtitle">Aquí se guardan todos los cupones que vas desbloqueando para usarlos con Fer.</p>
+
+      <!-- Pestañas de Filtro -->
+      <div class="wallet-filter-tabs">
+        <button class="tab-btn active" onclick="filterWallet('todos', this)">Todos</button>
+        <button class="tab-btn" onclick="filterWallet('disponibles', this)">Disponibles</button>
+        <button class="tab-btn" onclick="filterWallet('canjeados', this)">Canjeados</button>
+      </div>
+
+      <div class="wallet-list" id="wallet-list">
+        <!-- Renderizado dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

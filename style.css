@@ -1,0 +1,1506 @@
+/* ==========================================================================
+   CALENDARIO DE ADVIENTO DE AMOR - ESTILOS ROMÁNTICOS
+   ========================================================================== */
+
+:root {
+  --color-bg-dark: #14020b;
+  --color-bg-card: rgba(59, 7, 26, 0.75);
+  --color-primary: #e11d48;
+  --color-primary-hover: #be123c;
+  --color-rose-soft: #f43f5e;
+  --color-rose-glow: rgba(244, 63, 94, 0.45);
+  --color-accent-gold: #fbbf24;
+  --color-gold-light: #fef3c7;
+  --color-gold-glow: rgba(251, 191, 36, 0.45);
+  --color-text-main: #fdf2f8;
+  --color-text-muted: #fbcfe8;
+  --font-cursive: 'Great Vibes', cursive;
+  --font-script: 'Dancing Script', cursive;
+  --font-title: 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', system-ui, -apple-system, sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+  --shadow-card: 0 12px 30px -5px rgba(0, 0, 0, 0.55), 0 8px 12px -6px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 0 25px rgba(251, 191, 36, 0.45);
+  --shadow-rose: 0 0 25px rgba(225, 29, 72, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: radial-gradient(circle at 50% 8%, #4a0924 0%, #260514 45%, #13020b 80%, #0a0106 100%);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Luces suaves y bokeh de fondo */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 15% 25%, rgba(225, 29, 72, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(251, 191, 36, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(190, 18, 60, 0.12) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Canvas de Nieve y Corazones */
+#snow-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Luces Navideñas Románticas (Oro cálido, Rosa suave y Rubí) */
+.fairy-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+  padding: 5px 0;
+}
+
+.light-bulb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 14px #fbbf24, 0 0 25px rgba(251, 191, 36, 0.7);
+  animation: glowWarm 2.2s infinite alternate ease-in-out;
+}
+
+.light-bulb:nth-child(2n) {
+  background: #f43f5e;
+  box-shadow: 0 0 14px #f43f5e, 0 0 25px rgba(244, 63, 94, 0.7);
+  animation-delay: 0.5s;
+}
+
+.light-bulb:nth-child(3n) {
+  background: #fde047;
+  box-shadow: 0 0 14px #fde047, 0 0 25px rgba(253, 224, 71, 0.7);
+  animation-delay: 1s;
+}
+
+.light-bulb:nth-child(4n) {
+  background: #fda4af;
+  box-shadow: 0 0 14px #fda4af, 0 0 25px rgba(253, 164, 175, 0.7);
+  animation-delay: 1.5s;
+}
+
+@keyframes glowWarm {
+  0% { opacity: 0.35; transform: scale(0.88); }
+  100% { opacity: 1; transform: scale(1.18); }
+}
+
+/* Contenedor Principal */
+.app-container {
+  position: relative;
+  z-index: 5;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 90px 20px;
+}
+
+/* Barra Superior de Herramientas */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mode-badge {
+  background: rgba(76, 5, 25, 0.55);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fef08a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.controls-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-icon {
+  background: rgba(59, 7, 26, 0.5);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-icon:hover {
+  background: rgba(190, 18, 60, 0.4);
+  border-color: rgba(251, 191, 36, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.35);
+}
+
+.btn-icon.active {
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  border-color: #fbbf24;
+  box-shadow: 0 0 18px rgba(225, 29, 72, 0.6);
+}
+
+/* Encabezado */
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header-badge {
+  display: inline-block;
+  font-family: var(--font-script);
+  font-size: 1.35rem;
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.35), rgba(245, 158, 11, 0.25));
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  padding: 6px 26px;
+  border-radius: 50px;
+  color: #fef08a;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 20px rgba(225, 29, 72, 0.25);
+}
+
+.main-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(135deg, #ffffff 15%, #ffe4e6 50%, #fde047 85%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  filter: drop-shadow(0 4px 15px rgba(244, 63, 94, 0.35));
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+  max-width: 650px;
+  margin: 0 auto 20px auto;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Encabezado Compacto en la Página Principal */
+.compact-header-section {
+  text-align: center;
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.compact-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(135deg, #ffffff 15%, #ffe4e6 50%, #fde047 85%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(244, 63, 94, 0.45));
+}
+
+.btn-read-letter {
+  background: rgba(59, 7, 26, 0.65);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: #fef08a;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-read-letter:hover {
+  background: rgba(190, 18, 60, 0.5);
+  border-color: #fbbf24;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.4);
+}
+
+/* Elementos del Modal de Bienvenida */
+.welcome-modal-card {
+  max-width: 440px !important;
+  padding: 22px 18px 20px 18px !important;
+  border-radius: 22px !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.welcome-header-badge {
+  font-family: var(--font-script);
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.35), rgba(245, 158, 11, 0.25));
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  padding: 5px 18px;
+  border-radius: 50px;
+  color: #fef08a;
+  margin: 0 auto 8px auto;
+  display: inline-block;
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.25);
+  text-align: center;
+  line-height: 1.25;
+  max-width: calc(100% - 64px); /* Espacio libre para no chocar con el botón ✕ */
+}
+
+.welcome-modal-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.75rem, 4.5vw, 2.3rem);
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(135deg, #ffffff 15%, #ffe4e6 50%, #fde047 85%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  filter: drop-shadow(0 2px 8px rgba(244, 63, 94, 0.35));
+}
+
+.welcome-modal-subtitle {
+  font-size: 0.94rem;
+  color: #fbcfe8;
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.welcome-progress-box {
+  margin: 10px 0 !important;
+  padding: 10px 14px !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.welcome-short-note {
+  font-size: 0.86rem;
+  color: #fdf2f8;
+  margin: 8px 0 12px 0;
+  line-height: 1.4;
+  opacity: 0.95;
+  text-align: center;
+}
+
+/* Barra de Progreso Romántica */
+.progress-container {
+  max-width: 500px;
+  margin: 0 auto 30px auto;
+  background: rgba(59, 7, 26, 0.45);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+  color: #fde047;
+  font-weight: 500;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: rgba(15, 2, 8, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(251, 191, 36, 0.15);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #e11d48, #f43f5e, #fbbf24);
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+}
+
+/* Indicador de carrusel móvil oculto por defecto en escritorio */
+.mobile-swipe-hint {
+  display: none;
+}
+
+/* Grilla del Calendario (Desktop) */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  perspective: 1200px;
+}
+
+@media (min-width: 1100px) {
+  .calendar-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* ==========================================================================
+   TARJETA DE ADVIENTO 3D (FLIP CARD)
+   ========================================================================== */
+.advent-card {
+  position: relative;
+  aspect-ratio: 1 / 1.35;
+  min-height: 220px;
+  background: transparent;
+  perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: var(--radius-md);
+}
+
+.advent-card.day-24 {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .advent-card.day-24 {
+    grid-column: span 2;
+    aspect-ratio: auto;
+  }
+}
+
+/* Contenedor giratorio 3D */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+  border-radius: var(--radius-md);
+}
+
+/* Estado volteado */
+.advent-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Caras Frontal y Trasera */
+.card-front, .card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   CARA FRONTAL: SOLO EL NÚMERO (MISTERIOSO, ROMÁNTICO, SIN SPOILERS)
+   ========================================================================== */
+.card-front {
+  background: radial-gradient(circle at 50% 25%, #42061b 0%, #250410 60%, #150209 100%);
+  border: 1.5px solid rgba(251, 191, 36, 0.4);
+  color: var(--color-gold-light);
+  position: relative;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 25px rgba(225, 29, 72, 0.25);
+}
+
+.card-front::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(251, 191, 36, 0.35);
+  border-radius: calc(var(--radius-md) - 4px);
+  pointer-events: none;
+}
+
+/* Cintas decorativas de satén en cruz con brillo */
+.front-ribbon-v {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(225, 29, 72, 0.65) 0%, rgba(190, 18, 60, 0.45) 100%);
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.35);
+  pointer-events: none;
+}
+
+.front-ribbon-h {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 16px;
+  background: linear-gradient(90deg, rgba(225, 29, 72, 0.65) 0%, rgba(190, 18, 60, 0.45) 100%);
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.35);
+  pointer-events: none;
+}
+
+/* Título de amor en cada tarjeta no volteada */
+.front-brand-title {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-title);
+  font-size: 0.86rem;
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(135deg, #ffffff 15%, #ffe4e6 50%, #fde047 85%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(244, 63, 94, 0.45));
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Sello de cera real en relieve con filo de oro */
+.front-seal {
+  position: relative;
+  z-index: 2;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #be123c 0%, #881337 55%, #4c0519 100%);
+  border: 2.5px solid #fbbf24;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 20px rgba(244, 63, 94, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+  padding-top: 4px;
+}
+
+.advent-card:hover:not(.locked) .front-seal {
+  transform: scale(1.12) rotate(2deg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 25px rgba(251, 191, 36, 0.7);
+}
+
+.front-seal-heart {
+  position: absolute;
+  top: 9px;
+  font-size: 0.72rem;
+  color: #fde047;
+  opacity: 0.95;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+  animation: pulseHeart 2s infinite ease-in-out;
+}
+
+@keyframes pulseHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.front-day-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 40%, #fffbeb 70%, #fde047 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.9)) drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
+  line-height: 1;
+  margin-top: 6px;
+  letter-spacing: -1px;
+}
+
+/* Indicador sutil inferior estilo placa romántica */
+.front-status-hint {
+  position: absolute;
+  bottom: 12px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #fef08a;
+  background: rgba(36, 4, 16, 0.85);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 3px 12px;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos de estado de la cara frontal */
+.advent-card.available .card-front {
+  border-color: rgba(251, 191, 36, 0.85);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 25px rgba(251, 191, 36, 0.45);
+  animation: pulseGold 2.5s infinite ease-in-out;
+}
+
+.advent-card.locked .card-front {
+  opacity: 0.8;
+  filter: saturate(0.95);
+  cursor: not-allowed;
+}
+
+.advent-card.locked:hover,
+.advent-card.shake-anim {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Día 24 Especial (Nochebuena) */
+.advent-card.day-24 .card-front {
+  background: radial-gradient(circle at 50% 25%, #600827 0%, #360517 60%, #1e030e 100%);
+  border: 2px solid #fde047;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 35px rgba(251, 191, 36, 0.5);
+}
+
+.advent-card.day-24 .front-seal {
+  width: 95px;
+  height: 95px;
+  border: 3px solid #fde047;
+  background: radial-gradient(circle at 35% 35%, #e11d48 0%, #9f1239 60%, #4c0519 100%);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.7);
+}
+
+.advent-card.day-24 .front-day-number {
+  font-size: 3.1rem;
+  letter-spacing: -2px;
+}
+
+/* ==========================================================================
+   CARA TRASERA: CONTENIDO REVELADO
+   ========================================================================== */
+.card-back {
+  background: radial-gradient(circle at 50% 20%, #4c0519 0%, #2a0311 70%, #140108 100%);
+  border: 1.5px solid rgba(251, 191, 36, 0.6);
+  transform: rotateY(180deg);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 0 25px rgba(225, 29, 72, 0.4);
+  padding: 14px 14px 22px 14px;
+  box-sizing: border-box;
+}
+
+.back-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--color-gold-light);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+  padding-bottom: 5px;
+  flex-shrink: 0;
+}
+
+.back-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+  width: 100%;
+  padding: 4px 0;
+}
+
+.back-icon {
+  font-size: 2.1rem;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  animation: popIn 0.3s ease;
+  line-height: 1;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.back-title {
+  font-family: var(--font-title);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #fef08a;
+  line-height: 1.25;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: center;
+}
+
+.back-type-pill {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #fbcfe8;
+  margin-bottom: 4px;
+}
+
+.back-btn {
+  background: linear-gradient(135deg, #e11d48, #f59e0b);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.back-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.6);
+}
+
+/* Botón Flotante de Billetera de Cupones Romántica */
+.floating-wallet-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 55%, #fbbf24 100%);
+  color: #fff;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  padding: 14px 24px;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(225, 29, 72, 0.55), 0 0 15px rgba(251, 191, 36, 0.3);
+  z-index: 50;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.floating-wallet-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 14px 30px rgba(225, 29, 72, 0.75), 0 0 25px rgba(251, 191, 36, 0.5);
+}
+
+.wallet-badge {
+  background: #fff;
+  color: #be123c;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Modales Románticos */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 2, 7, 0.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: radial-gradient(circle at 50% 0%, #3a061a 0%, #1c030d 100%);
+  border: 1.5px solid rgba(251, 191, 36, 0.45);
+  border-radius: var(--radius-lg);
+  max-width: 520px;
+  width: 100%;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(225, 29, 72, 0.35);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 22px 18px;
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  z-index: 20;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(225, 29, 72, 0.85);
+  transform: rotate(90deg);
+}
+
+.modal-ribbon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px; /* Margen de seguridad para que NUNCA colisione con el botón cerrar ✕ */
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.modal-day-tag {
+  background: rgba(251, 191, 36, 0.18);
+  color: var(--color-gold-light);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.modal-title {
+  font-family: var(--font-title);
+  font-size: 1.9rem;
+  margin-top: 10px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.modal-subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-body {
+  font-size: 1rem;
+  color: #fdf2f8;
+  line-height: 1.7;
+}
+
+/* Cupones de Amor Estilizados (Estilo Certificado Dorado) */
+.coupon-box {
+  position: relative;
+  background: linear-gradient(135deg, #380519 0%, #540827 50%, #290312 100%);
+  border: 2px dashed rgba(251, 191, 36, 0.65);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(225, 29, 72, 0.2);
+  overflow: hidden;
+}
+
+.coupon-box::before, .coupon-box::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  background: #1c030d;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.coupon-box::before { left: -12px; }
+.coupon-box::after { right: -12px; }
+
+.coupon-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.coupon-icon {
+  font-size: 2.2rem;
+}
+
+.coupon-title {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  color: #fef08a;
+  font-weight: 700;
+}
+
+.coupon-desc {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+.coupon-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+}
+
+/* Sello de Canjeado */
+.redeemed-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  border: 3px solid #ef4444;
+  color: #ef4444;
+  font-size: 1.5rem;
+  font-weight: 900;
+  padding: 8px 24px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  letter-spacing: 2px;
+  background: rgba(15, 23, 42, 0.85);
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  animation: stampIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes stampIn {
+  0% { transform: translate(-50%, -50%) scale(2) rotate(0deg); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(-15deg); opacity: 1; }
+}
+
+/* Botones Principales */
+.btn-primary {
+  background: linear-gradient(135deg, #e11d48, #f59e0b);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 29, 72, 0.6);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text-main);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Tarjeta Rascable (Scratch Card) */
+.scratch-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 180px;
+  margin: 20px auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  touch-action: none;
+}
+
+.scratch-secret {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #be185d 0%, #4c1d95 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.5;
+  user-select: none;
+}
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  z-index: 2;
+}
+
+/* Ruleta de Citas */
+.roulette-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.roulette-wheel {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  border: 6px solid #f59e0b;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+  overflow: hidden;
+  transition: transform 3.5s cubic-bezier(0.15, 0.9, 0.2, 1);
+  background: conic-gradient(
+    #e11d48 0deg 60deg,
+    #059669 60deg 120deg,
+    #7c3aed 120deg 180deg,
+    #f59e0b 180deg 240deg,
+    #2563eb 240deg 300deg,
+    #db2777 300deg 360deg
+  );
+}
+
+.roulette-pointer {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 25px solid #fff;
+  z-index: 10;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+}
+
+.roulette-result {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-top: 15px;
+  font-size: 1.05rem;
+  color: var(--color-gold-light);
+  font-weight: 500;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Frasco de Besos */
+.jar-container {
+  text-align: center;
+  position: relative;
+  padding: 30px 0;
+}
+
+.jar-icon-btn {
+  background: none;
+  border: none;
+  font-size: 5.5rem;
+  cursor: pointer;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-block;
+  user-select: none;
+}
+
+.jar-icon-btn:hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.jar-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.floating-kiss {
+  position: absolute;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: floatUp 1.5s forwards ease-out;
+  z-index: 50;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.6); opacity: 1; }
+  100% { transform: translateY(-160px) translateX(var(--drift, 0px)) scale(1.4); opacity: 0; }
+}
+
+/* Lista de Recuerdos / Razones */
+.reasons-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.reasons-list li {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #f59e0b;
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* Billetera de Cupones */
+.wallet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.wallet-empty {
+  text-align: center;
+  padding: 30px 16px;
+  color: var(--color-text-muted);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px dashed rgba(251, 191, 36, 0.25);
+  border-radius: var(--radius-md);
+  margin-top: 12px;
+}
+
+.wallet-filter-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.tab-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-muted);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: #e11d48;
+  color: #fff;
+  border-color: #e11d48;
+}
+
+/* Pie de página */
+.footer-section {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.footer-section a {
+  color: var(--color-accent-gold);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   AJUSTES RESPONSIVOS (ESPECIAL PARA CELULAR: 1 TARJETA POR PANTALLA)
+   ========================================================================== */
+
+/* Tablets intermedias */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .calendar-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}
+
+/* Celulares (1 Tarjeta por pantalla, centrada, táctil y cómoda) */
+@media (max-width: 767px) {
+  .app-container {
+    padding: 10px 16px 20px 16px;
+  }
+
+  /* Barra superior y controles */
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .mode-badge {
+    font-size: 0.8rem;
+    padding: 5px 14px;
+  }
+
+  .controls-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-icon {
+    font-size: 0.78rem;
+    padding: 7px 12px;
+  }
+
+  /* Encabezado */
+  .header-badge {
+    font-size: 1.15rem;
+    padding: 4px 18px;
+  }
+
+  .main-title {
+    font-size: 2.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.98rem;
+    padding: 0 10px;
+    margin-bottom: 16px;
+  }
+
+  /* Indicador de deslizamiento en celular */
+  .mobile-swipe-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    user-select: none;
+  }
+
+  .swipe-hint-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fef08a;
+    background: rgba(59, 7, 26, 0.65);
+    border: 1px solid rgba(251, 191, 36, 0.35);
+    padding: 6px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .carousel-nav-btn {
+    background: linear-gradient(135deg, #e11d48, #be123c);
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .carousel-nav-btn:active {
+    transform: scale(0.9);
+  }
+
+  /* CARRUSEL HORIZONTAL: 1 TARJETA POR PANTALLA COMPLETA EN CELULAR */
+  .calendar-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 32px;
+    padding: 4px 16px 12px 16px !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    box-sizing: border-box;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .calendar-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+
+  /* Tarjeta individual que ocupa la pantalla del móvil con espacio armónico */
+  .advent-card {
+    flex: 0 0 calc(100vw - 32px) !important;
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    aspect-ratio: unset !important;
+    height: calc(100vh - 128px) !important;
+    height: calc(100dvh - 128px) !important;
+    min-height: 470px !important;
+    max-height: calc(100dvh - 110px) !important;
+    margin: 0;
+    transition: transform 0.25s ease;
+  }
+
+  .advent-card:active {
+    transform: scale(0.98);
+  }
+
+  .advent-card.day-24 {
+    flex: 0 0 calc(100vw - 32px) !important;
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    height: calc(100vh - 128px) !important;
+    height: calc(100dvh - 128px) !important;
+    min-height: 470px !important;
+    max-height: calc(100dvh - 110px) !important;
+  }
+
+  /* Título de amor en la tarjeta en móvil */
+  .front-brand-title {
+    top: 28px;
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* Sello de cera frontal en celular */
+  .front-seal {
+    width: 125px;
+    height: 125px;
+  }
+
+  .front-seal-heart {
+    top: 14px;
+    font-size: 1.05rem;
+  }
+
+  .front-day-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4.2rem;
+    font-weight: 900;
+    margin-top: 6px;
+  }
+
+  .front-status-hint {
+    font-size: 0.95rem;
+    padding: 8px 22px;
+    bottom: 28px;
+  }
+
+  /* Cara trasera revelada en celular ocupando toda la tarjeta */
+  .card-back {
+    padding: 24px 22px 28px 22px;
+  }
+
+  .back-header {
+    font-size: 1.05rem;
+    padding-bottom: 10px;
+  }
+
+  .back-icon {
+    font-size: 4.2rem;
+    margin-bottom: 10px;
+  }
+
+  .back-type-pill {
+    font-size: 0.85rem;
+    padding: 5px 16px;
+    margin-bottom: 10px;
+  }
+
+  .back-title {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin-bottom: 14px;
+    max-width: 92%;
+  }
+
+  .back-btn {
+    padding: 13px 24px;
+    font-size: 0.96rem;
+    border-radius: 30px;
+    margin-top: 10px;
+  }
+
+  /* Modales en celular */
+  .modal-overlay {
+    padding: 14px;
+  }
+
+  .modal-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+
+  .modal-ribbon {
+    padding: 0 42px;
+    margin-bottom: 12px;
+  }
+
+  .modal-title {
+    font-size: 1.6rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .scratch-container {
+    height: 160px;
+  }
+
+  .roulette-wheel {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Botón Flotante de Cupones en celular: centrado y con el mismo ancho que la tarjeta */
+  .floating-wallet-btn {
+    bottom: 16px;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 13px 20px;
+    font-size: 0.95rem;
+    box-shadow: 0 8px 25px rgba(225, 29, 72, 0.65), 0 0 20px rgba(251, 191, 36, 0.4);
+  }
+
+  .floating-wallet-btn:hover {
+    transform: translateX(-50%) !important;
+  }
+
+  .floating-wallet-btn:active {
+    transform: translateX(-50%) scale(0.98) !important;
+  }
+}
